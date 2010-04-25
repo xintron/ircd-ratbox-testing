@@ -34,8 +34,8 @@ build() {
     mkdir -p $pkgdir/etc/ircd-ratbox
     cd $srcdir/${_pkgname}-$pkgver
     make DESTDIR=$pkgdir install || return 1
-    cd contrib/
-    make DESTDIR=$pkgdir install || return 1
 
+    mkdir -p $pkgdir/usr/local/${_pkgname}/modules/contrib/
+    cp $srcdir/${_pkgname}-$pkgver/contrib/.libs/*.so $pkgdir/usr/local/${_pkgname}/modules/contrib/
     install -D -m755 "$srcdir/ircd" "$pkgdir/etc/rc.d/ircd"
 }
